@@ -1,6 +1,6 @@
-import { recipesActions, setError } from '@recipes/services';
+import { recipesActions, setAlert } from '@recipes/services';
 import { utils } from '@recipes/services';
-import { put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 export function* watchGetRecipes() {
   try {
@@ -10,7 +10,7 @@ export function* watchGetRecipes() {
 
     yield put(recipesActions.setRecipes(JSON.parse(res)));
   } catch (error) {
-    //yield put(setError(error.message));
+    yield put(setAlert({ type: 'error', msg: error.message }));
   }
 }
 
@@ -24,7 +24,7 @@ export function* watchUpdateRecipes({ payload }) {
 
     yield put(recipesActions.getRecipes());
   } catch (error) {
-    //yield put(setError(error.message));
+    yield put(setAlert({ type: 'error', msg: error.message }));
   }
 }
 

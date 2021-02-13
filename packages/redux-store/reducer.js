@@ -3,6 +3,8 @@ import {
   recipesServiceReducer,
   menuServiceReducer,
   settingsServiceReducer,
+  alertServiceReducer,
+  searchServiceReducer,
 } from '@recipes/services';
 import { combineReducers } from 'redux';
 
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
   recipesServiceReducer,
   menuServiceReducer,
   settingsServiceReducer,
+  alertServiceReducer,
+  searchServiceReducer,
 });
 
 export default rootReducer;

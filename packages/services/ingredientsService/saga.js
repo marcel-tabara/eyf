@@ -1,10 +1,5 @@
-import {
-  ingredientsActions,
-  createItem,
-  setError,
-  utils,
-} from '@recipes/services';
-import { put, select, takeEvery, takeLatest } from 'redux-saga/effects';
+import { ingredientsActions, setAlert, utils } from '@recipes/services';
+import { put, takeLatest } from 'redux-saga/effects';
 
 export function* watchGetIngredients() {
   try {
@@ -14,12 +9,11 @@ export function* watchGetIngredients() {
 
     yield put(ingredientsActions.setIngredients(JSON.parse(res)));
   } catch (error) {
-    //yield put(setError(error.message));
+    yield put(setAlert({ type: 'error', msg: error.message }));
   }
 }
 
 export function* watchUpdateIngredients({ payload }) {
-  console.log('########## payload', payload);
   try {
     yield utils.callBackend('write', {
       type: 'eat_my_food_ingredients',
@@ -28,7 +22,7 @@ export function* watchUpdateIngredients({ payload }) {
 
     yield put(ingredientsActions.getIngredients());
   } catch (error) {
-    //yield put(setError(error.message));
+    yield put(setAlert({ type: 'error', msg: error.message }));
   }
 }
 

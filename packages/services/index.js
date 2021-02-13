@@ -18,5 +18,21 @@ export {
   settingsSelectors,
   settingsSchemas,
 } from '@recipes/services/settingsService';
-export { menuServiceReducer, menuActions } from '@recipes/services/menuService';
+export {
+  menuServiceReducer,
+  menuActions,
+  menuSelectors,
+  menuSchemas,
+  menuUtils,
+} from '@recipes/services/menuService';
+export {
+  alertServiceReducer,
+  alertActions,
+  alertSelectors,
+} from '@recipes/services/alertService';
+export {
+  searchServiceReducer,
+  searchActions,
+  searchSelectors,
+} from '@recipes/services/searchService';
 export { utils };

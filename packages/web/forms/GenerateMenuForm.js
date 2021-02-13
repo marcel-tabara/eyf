@@ -115,9 +115,14 @@ const GenerateMenuForm = (props) => {
     return (
       <div>
         <div>
-          <a onClick={goTo} className="simpleLink">
+          <Button
+            component="button"
+            color="primary"
+            variant="outlined"
+            onClick={goTo}
+          >
             Back
-          </a>
+          </Button>
         </div>
         <Form
           schema={schema}

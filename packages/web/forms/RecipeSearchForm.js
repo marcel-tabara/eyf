@@ -42,7 +42,6 @@ const RecipeSearchForm = ({
 
   return (
     <div className="filterRecipesBox">
-      <span className="filterComponentsLabel">FILTER RECIPES</span>
       <div className="paddingTop">
         <Form
           schema={schema}

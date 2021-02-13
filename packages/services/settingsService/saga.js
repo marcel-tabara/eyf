@@ -1,6 +1,6 @@
-import { settingsActions, setError } from '@recipes/services';
+import { settingsActions, setAlert } from '@recipes/services';
 import { utils } from '@recipes/services';
-import { put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 export function* watchGetSettings() {
   try {
@@ -10,12 +10,11 @@ export function* watchGetSettings() {
 
     yield put(settingsActions.setSettings(JSON.parse(res)));
   } catch (error) {
-    //yield put(setError(error.message));
+    yield put(setAlert({ type: 'error', msg: error.message }));
   }
 }
 
 export function* watchUpdateSettings({ payload }) {
-  console.log('########## payload', payload);
   try {
     yield utils.callBackend('write', {
       type: 'eat_my_food_settings',
@@ -24,7 +23,7 @@ export function* watchUpdateSettings({ payload }) {
 
     yield put(settingsActions.getSettings());
   } catch (error) {
-    //yield put(setError(error.message));
+    yield put(setAlert({ type: 'error', msg: error.message }));
   }
 }
 

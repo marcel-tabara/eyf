@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import * as menuUtils from './menuUtils';
 
 const menuService = createSlice({
   name: 'menus',
@@ -21,3 +22,4 @@ const { actions, reducer } = menuService;
 
 export { reducer as menuServiceReducer };
 export { actions as menuActions };
+export { menuUtils };
