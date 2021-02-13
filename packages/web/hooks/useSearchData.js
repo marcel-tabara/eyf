@@ -1,10 +1,10 @@
-import { searchSelectors } from '@bpgen/services'
-import { useSelector } from 'react-redux'
+import { searchSelectors } from '@recipes/services';
+import { useSelector } from 'react-redux';
 
 export const useSearchData = () => {
-  const searchData = useSelector(searchSelectors.searchSelector) || {}
+  const searchData = useSelector(searchSelectors.searchSelector) || {};
 
   return {
     searchData,
-  }
-}
+  };
+};

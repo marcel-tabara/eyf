@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { alertSelectors } from '@recipes/services';
+import { useSelector } from 'react-redux';
 
-export const useAlertDialog = () => {
-  const [alertDialog, setAlertDialog] = useState({ open: false, id: null })
+export const useAlert = () => {
+  const alert = useSelector(alertSelectors.alertSelector) || {};
 
   return {
-    alertDialog,
-    setAlertDialog,
-  }
-}
+    alertType: alert.type,
+    alertMsg: alert.msg,
+  };
+};

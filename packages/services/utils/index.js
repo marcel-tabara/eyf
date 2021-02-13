@@ -35,8 +35,8 @@ export const getAvalableRecipesGroups = (ingredients, recipes, history) => {
   return groupBy(availableRecipes, 'recipeType');
 };
 
-export const callBackend = (type, data) => {
+export const persistData = (type, data) => {
   return type === 'read'
-    ? localStorage.getItem(data.type)
+    ? JSON.parse(localStorage.getItem(data.type))
     : localStorage.setItem(data.type, JSON.stringify(data.payload));
 };

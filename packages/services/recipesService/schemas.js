@@ -1,6 +1,6 @@
 const recipeTypeEnums = ['SOUP', 'MAIN', 'SALAD'];
 
-export const recipesSchema = ({ recipe, ingredientsList }) => {
+export const recipesSchema = ({ recipe, ingredients }) => {
   const { id, name, description, recipeType, plates, startTime } = recipe;
   return {
     type: 'object',
@@ -27,7 +27,7 @@ export const recipesSchema = ({ recipe, ingredientsList }) => {
         title: 'Ingredients',
         items: {
           type: 'string',
-          enum: ingredientsList,
+          enum: ingredients,
         },
       },
     },

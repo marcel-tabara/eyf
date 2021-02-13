@@ -1,7 +1,7 @@
 import React from 'react';
 import sortBy from 'lodash/sortBy';
 import get from 'lodash/get';
-import RecipesSearchForm from '../forms/RecipeSearchForm';
+import IngredientSearchForm from '../forms/IngredientSearchForm';
 import { navigate } from '@reach/router';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,7 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import { recipesActions, recipesSelectors } from '@recipes/services';
+import { ingredientsActions, ingredientsSelectors } from '@recipes/services';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTableStyle } from '../hooks/useTableStyle';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,56 +23,50 @@ const useStyles = makeStyles({
   table: { minWidth: 650 },
 });
 
-const RecipesListView = (props) => {
+const IngredientsList = (props) => {
   const dispatch = useDispatch();
-  const recipes = useSelector(recipesSelectors.recipesSelector) || [];
+  const ingredients =
+    useSelector(ingredientsSelectors.ingredientsSelector) || [];
+
+  const deleteIngredient = ({ target: { id } }) => {
+    const newIngr = ingredients.filter((e) => e.name !== id);
+    dispatch(ingredientsActions.updateIngredients(newIngr));
+  };
+
   const { StyledTableCell, StyledTableRow } = useTableStyle();
   const classes = useStyles();
 
-  const deleteRecipe = ({ target: { id } }) => {
-    console.log('########## id', id);
-    const newRec = recipes.filter((e) => e.name !== id);
-    dispatch(recipesActions.updateRecipes(newRec));
-  };
-
   const filteredItems = () => {
-    const filteredRecipes = recipes.filter((el) => {
-      if (
-        get(props.searchData, 'name', false) ||
-        get(props.searchData, 'recipeType', false)
-      ) {
-        return (
-          el.name
-            .toLowerCase()
-            .includes(get(props.searchData, 'name', el.name).toLowerCase()) &&
-          get(props.searchData, 'recipeType', el.recipeType) === el.recipeType
-        );
-      }
-      return el;
+    const filteredIngredients = ingredients.filter((el) => {
+      return (
+        el.name
+          .toLowerCase()
+          .includes(get(props.searchData, 'name', el.name).toLowerCase()) &&
+        get(props.searchData, 'ingredientType', el.ingredientType) ===
+          el.ingredientType &&
+        get(props.searchData, 'stockType', el.isOutOfStock) === el.isOutOfStock
+      );
     });
 
-    return sortBy(filteredRecipes, (el) => el.name);
+    return sortBy(filteredIngredients, (el) => el.name);
   };
 
-  const recipesList = () => {
-    return filteredItems().map((recipe) => {
-      const { name, id, description, recipeType } = recipe;
+  const ingredientsList = () => {
+    return filteredItems().map((ingredient) => {
+      const { name, id, ingredientType, isOutOfStock } = ingredient;
 
-      const goTo = () => {
-        navigate(`/recipe/${id}`);
-      };
-
+      const goTo = ({ target: { id } }) => navigate(`/ingredient/${id}`);
       return (
         <StyledTableRow key={name}>
           <TableCell>
-            <a onClick={goTo} className="simpleLink">
+            <a onClick={goTo} className="simpleLink" id={name}>
               {name}
             </a>
           </TableCell>
-          <TableCell>{recipeType}</TableCell>
-          <TableCell>{description.slice(0, 100)}</TableCell>
+          <TableCell>{ingredientType}</TableCell>
+          <TableCell>{isOutOfStock ? 'out of stock' : 'in stock'}</TableCell>
           <TableCell align="right">
-            <a className="simpleLink" id={id} onClick={deleteRecipe} id={name}>
+            <a className="simpleLink" id={name} onClick={deleteIngredient}>
               Delete
             </a>
           </TableCell>
@@ -83,15 +77,17 @@ const RecipesListView = (props) => {
 
   return (
     <div>
-      <RecipesSearchForm />
-      <Button
-        component="button"
-        color="primary"
-        variant="outlined"
-        onClick={() => navigate('/recipe/new')}
-      >
-        Add Recipe
-      </Button>
+      <IngredientSearchForm />
+      <div>
+        <Button
+          component="button"
+          color="primary"
+          variant="outlined"
+          onClick={() => navigate('/ingredient/new')}
+        >
+          Add Ingredient
+        </Button>
+      </div>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -102,11 +98,11 @@ const RecipesListView = (props) => {
               <StyledTableCell align="right">Actions</StyledTableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{recipesList()}</TableBody>
+          <TableBody>{ingredientsList()}</TableBody>
         </Table>
       </TableContainer>
     </div>
   );
 };
 
-export default RecipesListView;
+export default IngredientsList;

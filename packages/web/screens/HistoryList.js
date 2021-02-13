@@ -7,7 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-const HistoryListView = (props) => {
+const HistoryList = (props) => {
   const history = props.history || [];
   const deleteEntry = (event) => {
     props.deleteEntry({ id: event.target.id });
@@ -39,4 +39,4 @@ const HistoryListView = (props) => {
   );
 };
 
-export default HistoryListView;
+export default HistoryList;

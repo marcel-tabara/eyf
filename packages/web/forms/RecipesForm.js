@@ -24,9 +24,7 @@ const RecipesForm = (props) => {
     ? recipes.find((recipe) => recipe.name === props.id)
     : [];
 
-  //const ingredients = sortBy(props.ingredients, (el) => el.name) || [];
-  const ingredientsListArray = get(selectedRrecipe, 'ingredientsList', []);
-
+  const ingredientList = ingredients.map((e) => e.name).sort() || [];
   const recipe = selectedRrecipe || {
     name: '',
     description: '',
@@ -34,10 +32,9 @@ const RecipesForm = (props) => {
     plates: '',
   };
 
-  const ingredientsList = () => ingredients.map((el) => el.name);
   const schema = recipesSchemas.recipesSchema({
     recipe,
-    ingredientList: ingredientsList(),
+    ingredients: ingredientList,
   });
   const uiSchema = recipesSchemas.recipesUiSchema;
   const onSubmit = ({ formData }) => {
@@ -49,12 +46,12 @@ const RecipesForm = (props) => {
     navigate('/recipes');
   };
 
-  const onChange = (data) => {
-    const { formData } = data;
-    formData.ingredientsList = uniq(
-      get(formData, 'ingredientsList', []).concat(ingredientsListArray),
-    );
-  };
+  // const onChange = (data) => {
+  //   const { formData } = data;
+  //   formData.ingredientsList = uniq(
+  //     get(formData, 'ingredientsList', []).concat(ingredientsListArray),
+  //   );
+  // };
 
   const goTo = () => {
     navigate('/recipes');
@@ -76,7 +73,7 @@ const RecipesForm = (props) => {
       <Form
         schema={schema}
         uiSchema={uiSchema}
-        onChange={onChange}
+        //onChange={onChange}
         onSubmit={onSubmit}
         onError={log('errors')}
       />

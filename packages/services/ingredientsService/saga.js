@@ -1,28 +1,29 @@
-import { ingredientsActions, setAlert, utils } from '@recipes/services';
+import { ingredientsActions, alertActions, utils } from '@recipes/services';
 import { put, takeLatest } from 'redux-saga/effects';
 
 export function* watchGetIngredients() {
   try {
-    const res = yield utils.callBackend('read', {
+    const res = yield utils.persistData('read', {
       type: 'eat_my_food_ingredients',
     });
 
-    yield put(ingredientsActions.setIngredients(JSON.parse(res)));
+    yield put(ingredientsActions.setIngredients(res));
   } catch (error) {
-    yield put(setAlert({ type: 'error', msg: error.message }));
+    yield put(alertActions.setAlert({ type: 'error', msg: error.message }));
   }
 }
 
 export function* watchUpdateIngredients({ payload }) {
   try {
-    yield utils.callBackend('write', {
+    yield utils.persistData('write', {
       type: 'eat_my_food_ingredients',
       payload,
     });
 
     yield put(ingredientsActions.getIngredients());
+    yield put(alertActions.setAlert({ type: 'success', msg: 'Good Job' }));
   } catch (error) {
-    yield put(setAlert({ type: 'error', msg: error.message }));
+    yield put(alertActions.setAlert({ type: 'error', msg: error.message }));
   }
 }
 
