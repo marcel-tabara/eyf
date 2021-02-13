@@ -1,0 +1,23 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "expo": "yarn workspace @recipes/expo start",
+    "web": "yarn workspace @recipes/web start",
+    "build": "yarn workspace @recipes/web build",
+    "start": "yarn web",
+    "clean": "rimraf node_modules && lerna clean --yes && lerna exec -- rimraf dist .cache --parallel",
+    "cleaninstall": "yarn clean && yarn"
+  },
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "lerna": "^3.22.1",
+    "rimraf": "^3.0.2"
+  }
+}
