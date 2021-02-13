@@ -50,7 +50,6 @@ const RecipeSearchForm = ({
           onChange={onChange}
           onError={log('errors')}
           formData={searchData}
-          autocomplete="on"
         >
           <Button type="submit" className="hidden">
             Submit

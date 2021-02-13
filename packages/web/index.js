@@ -6,12 +6,17 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import './styles.scss';
-import { ingredientsActions, recipesActions } from '@recipes/services';
+import {
+  ingredientsActions,
+  recipesActions,
+  settingsActions,
+} from '@recipes/services';
 
 const theme = createMuiTheme({});
 const emfStore = store();
 emfStore.dispatch(recipesActions.getRecipes());
 emfStore.dispatch(ingredientsActions.getIngredients());
+emfStore.dispatch(settingsActions.getSettings());
 
 console.log('########## emfStore', emfStore.getState());
 

@@ -12,5 +12,11 @@ export {
   recipesSelectors,
   recipesSchemas,
 } from '@recipes/services/recipesService';
+export {
+  settingsServiceReducer,
+  settingsActions,
+  settingsSelectors,
+  settingsSchemas,
+} from '@recipes/services/settingsService';
 export { menuServiceReducer, menuActions } from '@recipes/services/menuService';
 export { utils };

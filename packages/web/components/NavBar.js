@@ -37,6 +37,9 @@ const NavBar = () => {
           <Button color="inherit" onClick={() => go('/generate')}>
             Generate
           </Button>
+          <Button color="inherit" onClick={() => go('/settings')}>
+            Settings
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
