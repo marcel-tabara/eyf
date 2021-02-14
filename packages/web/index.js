@@ -18,8 +18,6 @@ emfStore.dispatch(recipesActions.getRecipes());
 emfStore.dispatch(ingredientsActions.getIngredients());
 emfStore.dispatch(settingsActions.getSettings());
 
-console.log('########## emfStore', emfStore.getState());
-
 render(
   <Provider store={emfStore}>
     <ThemeProvider theme={theme}>

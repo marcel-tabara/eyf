@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import isEmpty from 'lodash/isEmpty';
 import { getAvalableRecipesGroups } from '@recipes/services/utils';
 import { navigate } from '@reach/router';
+import { menuSchemas } from '@recipes/services';
 
 const GenerateMenuForm = (props) => {
   const [days, setDays] = useState(0);
@@ -108,7 +109,9 @@ const GenerateMenuForm = (props) => {
     setMenu(getAvalableRecipesGroups(ingredients, recipes, history));
   };
 
-  const goTo = () => navigate('/recipes');
+  const goBack = useCallback(() => {
+    navigate('/recipes');
+  }, []);
 
   const renderForm = () => {
     if (!isEmpty(menu)) return null;
@@ -119,7 +122,7 @@ const GenerateMenuForm = (props) => {
             component="button"
             color="primary"
             variant="outlined"
-            onClick={goTo}
+            onClick={goBack}
           >
             Back
           </Button>

@@ -67,29 +67,6 @@ body {
   min-width: 300px;
 }
 
-.rst__moveHandle,
-.rst__loadingHandle {
-  background-color: #b5a33f;
-  border-radius: 10px 0px 0px 10px !important;
-  border: 1px solid #b5a33f;
-  color: white;
-}
-
-div.rst__rowContents {
-  border-radius: 0px 10px 10px 0px;
-  border-top: 1px solid #b5a33f;
-  border-bottom: 1px solid #b5a33f;
-  border-right: 1px solid #b5a33f;
-}
-
-div.rst__moveHandle {
-  background-color: #b5a33f;
-}
-
-.rstcustom__rowLabel {
-  cursor: pointer;
-}
-
 .search {
   justify-content: flex-end;
   display: flex;
@@ -115,4 +92,10 @@ div.rst__moveHandle {
   align-items: center;
   display: flex;
   height: 100%;
+}
+
+.bodyContent {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid red;
 }

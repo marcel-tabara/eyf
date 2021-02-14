@@ -16,7 +16,7 @@ const Main = () => {
         <Navbar />
         <div className="container">
           <CustomAlert />
-          <div className={classes.content}>{routes}</div>
+          <div>{routes}</div>
         </div>
       </div>
     </div>

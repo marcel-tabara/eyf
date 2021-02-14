@@ -1,19 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import * as menuUtils from './menuUtils';
+import * as menuUtils from './utils';
+import * as menuSchemas from './schemas';
 
 const menuService = createSlice({
   name: 'menus',
   initialState: {},
   reducers: {
+    updateHistory: () => {},
     getHistory: () => {},
     setHistory: (state, action) => {
       state[action.payload.type] = action.payload.data;
-    },
-    createItem: (state, action) => {
-      state.collections = action.payload;
-    },
-    deleteItem: (state, action) => {
-      state.collections = action.payload;
     },
   },
 });
@@ -23,3 +19,4 @@ const { actions, reducer } = menuService;
 export { reducer as menuServiceReducer };
 export { actions as menuActions };
 export { menuUtils };
+export { menuSchemas };
